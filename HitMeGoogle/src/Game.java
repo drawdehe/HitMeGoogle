@@ -50,6 +50,10 @@ public class Game {
 			return playerTwo;
 		} 
 	}
+	public boolean checkIfValidWord() {
+		//Implement later
+		return false;
+		}
 	public void startGame() {
 		System.out.println("Enter the name of player one: ");
 		Player p1 =  new Player(scan.next());
