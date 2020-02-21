@@ -50,10 +50,13 @@ public class Game {
 			return playerTwo;
 		} 
 	}
-	public boolean checkIfValidWord() {
-		//Implement later
-		return false;
+	public boolean checkIfValidWord(String word) {
+		if (word.length() > 2 && word.charAt(0) == letter) {
+			return true;
+		} else {
+			return false;
 		}
+	}
 	public void startGame() {
 		System.out.println("Enter the name of player one: ");
 		Player p1 =  new Player(scan.next());
@@ -64,16 +67,32 @@ public class Game {
 		playerTwo = p2;
 		
 		while (round < 12) {
+			int x = 0;
+			int y = 0;
 			letter = alphabet.charAt(rand.nextInt(alphabet.length()));
 			
 			System.out.println("\nRound: " + round);
 			System.out.println("The letter is: " + letter + "\n");
 			
-			System.out.println("Enter the word of " + p1.getName() + ": ");
-			p1.setWord(scan.next());
-			
-			System.out.println("Enter the word of " + p2.getName() + ": ");
-			p2.setWord(scan.next());
+			//THE METHOD DOES NOT REALLY WORK RIGHT NOW. Also, make this a private method instead
+			while (x == 0) {
+				System.out.println("Enter the word of " + p1.getName() + ": ");
+				p1.setWord(scan.next());
+				if (!checkIfValidWord(p1.getWord())) {
+					System.out.println("That is not a valid word.\nThe word has to start with " + letter + " and be at least three letters.\n");
+				} else {
+					x = 1;
+				}
+			}
+			while (y == 0) {
+				System.out.println("Enter the word of " + p2.getName() + ": ");
+				p2.setWord(scan.next());
+				if (!checkIfValidWord(p1.getWord())) {
+					System.out.println("That is not a valid word.\nThe word has to start with " + letter + " and be at least three letters.\n");
+				} else {
+					y = 1;
+				}
+			}
 			
 			System.out.println("\n" + p1.getName() + " wrote: " + p1.getWord());
 			System.out.println(p2.getName() + " wrote: " + p2.getWord());
@@ -82,41 +101,5 @@ public class Game {
 			
 			round++;
 		}
-	}
-	public static void main (String args[]) {
-		
-		//Only for test purposes
-		
-		/*Scanner scan = new Scanner(System.in);
-		Random rand = new Random();
-		int round = 1;
-		String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		char letter;
-		
-		System.out.println("Enter the name of player one: ");
-		Player p1 =  new Player(scan.next());
-		System.out.println("Enter the name of player two: ");
-		Player p2 =  new Player(scan.next());
-		Game game = new Game(p1, p2);
-		
-		while (round < 12) {
-			letter = alphabet.charAt(rand.nextInt(alphabet.length()));
-			System.out.println();
-			
-			System.out.println("Round: " + round);
-			System.out.println("The letter is: " + letter + "\n");
-			
-			System.out.println("Enter the word of player one: ");
-			p1.setWord(scan.next());
-			
-			System.out.println("Enter the word of player two: ");
-			p2.setWord(scan.next());
-			System.out.println();
-			
-			System.out.println("Player one wrote: " + p1.getWord());
-			System.out.println("Player two wrote: " + p2.getWord());
-			
-			round++;
-		}*/
 	}
 }
